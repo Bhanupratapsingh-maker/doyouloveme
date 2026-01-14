@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hy Shawty Do you love me?</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #ffe4e1; /* Rose white background */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+            width: 350px;
+            z-index: 10;
+        }
+
+        .gif-box {
+            width: 100%;
+            height: 200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .gif-box img {
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 10px;
+        }
+
+        h1 {
+            color: #ff4d6d;
+            font-size: 22px;
+            margin-bottom: 25px;
+            height: 60px; /* Space for changing text */
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        button {
+            padding: 12px 25px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        #yesBtn {
+            background-color: #ff4d6d;
+            color: white;
+        }
+
+        #noBtn {
+            background-color: #6c757d;
+            color: white;
+            position: relative;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <div class="gif-box">
+            <img id="displayGif" src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExOGUyamVyMXVyYzJ2bGUwdDYzdHU1aGQzbDNzbjA1d3Q2Mnc3ZmRsZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/UDmLwplVrsPjD9RY1N/giphy.gif" alt="cute cat">
+        </div>
+        <h1 id="mainText">Do you love me? 🥺</h1>
+        <div class="buttons">
+            <button id="yesBtn" onclick="celebrate()">Yes</button>
+            <button id="noBtn" onmouseover="moveButton()" onclick="moveButton()">No</button>
+        </div>
+    </div>
+
+    <script>
+        const mainText = document.getElementById('mainText');
+        const displayGif = document.getElementById('displayGif');
+        const noBtn = document.getElementById('noBtn');
+        const yesBtn = document.getElementById('yesBtn');
+
+        let clickCount = 0;
+
+        // Content logic exactly from the video
+        const sequence = [
+            { text: "Please think again! 😢", gif: "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExanI3eWoxdW9qaWZ1NjY1dW8wbmh5Y2E2ZWkzbDJzMTg1bGl2bzVhcCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/F7diD8tCkor5crWmtE/giphy.gif" },
+            { text: "Ek aur baar Soch lo! 😤", gif: "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExZ3IybmJyeXZsbW82cnY0NzRvZ3p3aXlpNzc4eWNhNGN3ejVmb3R2MCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/J509hr2j0oMejwlKOS/giphy.gif" },
+            { text: "beautiful pls Man jao na! Kitna code likh waogi 😭", gif: "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExNXY4bHM0YWk4aWE0djA5OWlvMjJmaHA3Mmh3dmFhbGMwbTJvanN2ayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/nrOJV4BVP9UC4aVLbD/giphy.gif" }
+        ];
+
+        function moveButton() {
+            // 1. Update text and gif based on stage
+            if (clickCount < sequence.length) {
+                mainText.innerText = sequence[clickCount].text;
+                displayGif.src = sequence[clickCount].gif;
+                clickCount++;
+            }
+
+            // 2. The "Run Away" Effect
+            // We calculate screen size minus button size so it stays visible
+            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+
+            noBtn.style.position = "absolute";
+            noBtn.style.left = x + "px";
+            noBtn.style.top = y + "px";
+        }
+
+        function celebrate() {
+            mainText.innerText = "I knew it! You Love me a lot 😘";
+            displayGif.src = "https://media1.tenor.com/m/gUiu1zyxfzYAAAAC/bear-kiss-bear-kisses.gif"; // Kiss/Happy gif
+            
+            // Hide the No button and style the Yes button
+            noBtn.style.display = "none";
+            yesBtn.style.transform = "scale(1.5)";
+            yesBtn.innerText = "Yay! ❤️";
+        }
+    </script>
+</body>
+</html>
